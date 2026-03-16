@@ -1,54 +1,94 @@
-# Telemetry Commands Packs 00-15
+# const.py
+NAME = "BMS Connector"
+DOMAIN = "bms_connector"
+VERSION = "1.1.0"
+ATTRIBUTION = "Integration for BMS via serial communication."
+
+BMS_TYPE_DEFAULTS = {
+    "SEPLV2": {"bms_name": "SEP BMS V2 (SEPLV2)", "default_prefix": "Seplos BMS HA", "default_address": "0x00"},
+    "SEPLV3": {"bms_name": "SEP BMS V3 (SEPLV3)", "default_prefix": "Seplos BMS V3", "default_address": "0x01"},
+}
+
+ 
+# Commandes Telemetry format PYLON — packs 00 à 15
+# (NON utilisées pour SEPLOS V3 Modbus RTU — voir data_parser.build_commands_for_address)
 TELEMETRY_COMMANDS = {
-    0: "~20004642E00200FD37\r",
-    1: "~20004642E00201FD36\r",
-    2: "~20004642E00202FD35\r",
-    3: "~20004642E00203FD34\r",
-    4: "~20004642E00204FD33\r",
-    5: "~20004642E00205FD32\r",
-    6: "~20004642E00206FD31\r",
-    7: "~20004642E00207FD30\r",
-    8: "~20004642E00208FD2F\r",
-    9: "~20004642E00209FD2E\r",
+    0:  "~20004642E00200FD37\r",
+    1:  "~20004642E00201FD36\r",
+    2:  "~20004642E00202FD35\r",
+    3:  "~20004642E00203FD34\r",
+    4:  "~20004642E00204FD33\r",
+    5:  "~20004642E00205FD32\r",
+    6:  "~20004642E00206FD31\r",
+    7:  "~20004642E00207FD30\r",
+    8:  "~20004642E00208FD2F\r",
+    9:  "~20004642E00209FD2E\r",
     10: "~20004642E00210FD36\r",
     11: "~20004642E00211FD35\r",
     12: "~20004642E00212FD34\r",
     13: "~20004642E00213FD33\r",
     14: "~20004642E00214FD32\r",
-    15: "~20004642E00215FD31\r"
+    15: "~20004642E00215FD31\r",
 }
-
-# Teledata Codes Packs 00-15
+ 
+# Commandes Teledata format PYLON — packs 00 à 15
+# (NON utilisées pour SEPLOS V3 Modbus RTU)
 TELEDATA_CODES = {
-    0: "~20004644E00200FD35\r",
-    1: "~20004644E00201FD34\r",
-    2: "~20004644E00202FD33\r",
-    3: "~20004644E00203FD32\r",
-    4: "~20004644E00204FD31\r",
-    5: "~20004644E00205FD30\r",
-    6: "~20004644E00206FD2F\r",
-    7: "~20004644E00207FD2E\r",
-    8: "~20004644E00208FD2D\r",
-    9: "~20004644E00209FD2C\r",
+    0:  "~20004644E00200FD35\r",
+    1:  "~20004644E00201FD34\r",
+    2:  "~20004644E00202FD33\r",
+    3:  "~20004644E00203FD32\r",
+    4:  "~20004644E00204FD31\r",
+    5:  "~20004644E00205FD30\r",
+    6:  "~20004644E00206FD2F\r",
+    7:  "~20004644E00207FD2E\r",
+    8:  "~20004644E00208FD2D\r",
+    9:  "~20004644E00209FD2C\r",
     10: "~20004644E00210FD34\r",
     11: "~20004644E00211FD33\r",
     12: "~20004644E00212FD32\r",
     13: "~20004644E00213FD31\r",
     14: "~20004644E00214FD30\r",
-    15: "~20004644E00215FD2F\r"
+    15: "~20004644E00215FD2F\r",
 }
-
+ 
+# ---------------------------------------------------------------------------
+# Registres Modbus RTU SEPLOS V3 (pour référence)
+# ---------------------------------------------------------------------------
+ 
+# Pack Info A — registres 0x1000 à 0x1011
+MODBUS_PIA_START_REG   = 0x1000
+MODBUS_PIA_REG_COUNT   = 0x12   # 18 registres
+ 
+# Pack Info B — registres 0x1100 à 0x1119
+MODBUS_PIB_START_REG   = 0x1100
+MODBUS_PIB_REG_COUNT   = 0x1A   # 26 registres
+ 
+# Pack Info C (alarmes bit-field) — registres 0x1200+
+MODBUS_PIC_START_REG   = 0x1200
+MODBUS_PIC_REG_COUNT   = 0x90   # 144 coils (commande 0x01)
+ 
+# EMS Info A — registres 0x2000+
+MODBUS_EIA_START_REG   = 0x2000
+ 
+# ---------------------------------------------------------------------------
+# Attributs exposés par les capteurs
+# ---------------------------------------------------------------------------
+ 
 ALARM_ATTRIBUTES = [
     "cellAlarm", "tempAlarm", "currentAlarm", "voltageAlarm",
     "customAlarms", "alarmEvent0", "alarmEvent1", "alarmEvent2",
     "alarmEvent3", "alarmEvent4", "alarmEvent5", "alarmEvent6",
     "alarmEvent7", "onOffState", "equilibriumState0", "equilibriumState1",
-    "systemState", "disconnectionState0", "disconnectionState1"
+    "systemState", "disconnectionState0", "disconnectionState1",
 ]
-
+ 
 SYSTEM_ATTRIBUTES = [
-    "device_name", "software_version", "manufacturer_name"
+    "device_name",
+    "software_version",
+    "manufacturer_name",
 ]
+ 
 SETTINGS_ATTRIBUTES = [
     "overcurrent_delay_recovery",
     "total_voltage_overvoltage_protection",
@@ -61,108 +101,113 @@ SETTINGS_ATTRIBUTES = [
     "monomer_low_pressure_alarm",
     "monomer_high_pressure_recovery",
     "battery_low_voltage_forbidden_charging",
-    "total_pressure_high_pressure_alarm"
+    "total_pressure_high_pressure_alarm",
 ]
+ 
+# ---------------------------------------------------------------------------
+# Correspondances alarmes → descriptions bit par bit
+# ---------------------------------------------------------------------------
+ 
 ALARM_MAPPINGS = {
     "alarmEvent0": [
-        "No Alarm", 
-        "Alarm that analog quantity reaches the lower limit", 
-        "Alarm that analog quantity reaches the upper limit", 
-        "Other alarms"
+        "No Alarm",
+        "Alarm that analog quantity reaches the lower limit",
+        "Alarm that analog quantity reaches the upper limit",
+        "Other alarms",
     ],
     "alarmEvent1": [
-        "Voltage sensor fault", 
-        "Temperature sensor fault", 
-        "Current sensor fault", 
-        "Key switch fault", 
-        "Cell voltage dropout fault", 
-        "Charge switch fault", 
-        "Discharge switch fault", 
-        "Current limit switch fault"
+        "Voltage sensor fault",
+        "Temperature sensor fault",
+        "Current sensor fault",
+        "Key switch fault",
+        "Cell voltage dropout fault",
+        "Charge switch fault",
+        "Discharge switch fault",
+        "Current limit switch fault",
     ],
     "alarmEvent2": [
-        "Monomer high voltage alarm", 
-        "Monomer overvoltage protection", 
-        "Monomer low voltage alarm", 
-        "Monomer under voltage protection", 
-        "High voltage alarm for total voltage", 
-        "Overvoltage protection for total voltage", 
-        "Low voltage alarm for total voltage", 
-        "Under voltage protection for total voltage"
+        "Monomer high voltage alarm",
+        "Monomer overvoltage protection",
+        "Monomer low voltage alarm",
+        "Monomer under voltage protection",
+        "High voltage alarm for total voltage",
+        "Overvoltage protection for total voltage",
+        "Low voltage alarm for total voltage",
+        "Under voltage protection for total voltage",
     ],
     "alarmEvent3": [
-        "Charge high temperature alarm", 
-        "Charge over temperature protection", 
-        "Charge low temperature alarm", 
-        "Charge under temperature protection", 
-        "Discharge high temperature alarm", 
-        "Discharge over temperature protection", 
-        "Discharge low temperature alarm", 
-        "Discharge under temperature protection"
+        "Charge high temperature alarm",
+        "Charge over temperature protection",
+        "Charge low temperature alarm",
+        "Charge under temperature protection",
+        "Discharge high temperature alarm",
+        "Discharge over temperature protection",
+        "Discharge low temperature alarm",
+        "Discharge under temperature protection",
     ],
     "alarmEvent4": [
-        "Environment high temperature alarm", 
-        "Environment over temperature protection", 
-        "Environment low temperature alarm", 
-        "Environment under temperature protection", 
-        "Power over temperature protection", 
-        "Power high temperature alarm", 
-        "Cell low temperature heating", 
-        "Reservation bit"
+        "Environment high temperature alarm",
+        "Environment over temperature protection",
+        "Environment low temperature alarm",
+        "Environment under temperature protection",
+        "Power over temperature protection",
+        "Power high temperature alarm",
+        "Cell low temperature heating",
+        "Reservation bit",
     ],
     "alarmEvent5": [
-        "Charge over current alarm", 
-        "Charge over current protection", 
-        "Discharge over current alarm", 
-        "Discharge over current protection", 
-        "Transient over current protection", 
-        "Output short circuit protection", 
-        "Transient over current lockout", 
-        "Output short circuit lockout"
+        "Charge over current alarm",
+        "Charge over current protection",
+        "Discharge over current alarm",
+        "Discharge over current protection",
+        "Transient over current protection",
+        "Output short circuit protection",
+        "Transient over current lockout",
+        "Output short circuit lockout",
     ],
     "alarmEvent6": [
-        "Charge high voltage protection", 
-        "Intermittent recharge waiting", 
-        "Residual capacity alarm", 
-        "Residual capacity protection", 
-        "Cell low voltage charging prohibition", 
-        "Output reverse polarity protection", 
-        "Output connection fault", 
-        "Inside bit"
+        "Charge high voltage protection",
+        "Intermittent recharge waiting",
+        "Residual capacity alarm",
+        "Residual capacity protection",
+        "Cell low voltage charging prohibition",
+        "Output reverse polarity protection",
+        "Output connection fault",
+        "Inside bit",
     ],
     "alarmEvent7": [
-        "Inside bit", 
-        "Inside bit", 
-        "Inside bit", 
-        "Inside bit", 
-        "Automatic charging waiting", 
-        "Manual charging waiting", 
-        "Inside bit", 
-        "Inside bit"
+        "Inside bit",
+        "Inside bit",
+        "Inside bit",
+        "Inside bit",
+        "Automatic charging waiting",
+        "Manual charging waiting",
+        "Inside bit",
+        "Inside bit",
     ],
     "alarmEvent8": [
-        "EEP storage fault", 
-        "RTC error", 
-        "Voltage calibration not performed", 
-        "Current calibration not performed", 
-        "Zero calibration not performed", 
-        "Inside bit", 
-        "Inside bit", 
-        "Inside bit"
+        "EEP storage fault",
+        "RTC error",
+        "Voltage calibration not performed",
+        "Current calibration not performed",
+        "Zero calibration not performed",
+        "Inside bit",
+        "Inside bit",
+        "Inside bit",
     ],
     "cellAlarm": {
         0: "No Alarm",
-        1: "Alarm"
+        1: "Alarm",
     },
     "tempAlarm": {
         0: "No Alarm",
-        1: "Alarm"
+        1: "Alarm",
     },
     "currentAlarm": {
-        1: "Charge/Discharge Current Alarm"
+        1: "Charge/Discharge Current Alarm",
     },
     "voltageAlarm": {
-        1: "Total Battery Voltage Alarm"
+        1: "Total Battery Voltage Alarm",
     },
     "onOffState": [
         "Discharge switch state",
@@ -172,7 +217,7 @@ ALARM_MAPPINGS = {
         "Reservation bit",
         "Reservation bit",
         "Reservation bit",
-        "Reservation bit"
+        "Reservation bit",
     ],
     "equilibriumState0": [
         "Cell 01 equilibrium",
@@ -182,7 +227,7 @@ ALARM_MAPPINGS = {
         "Cell 05 equilibrium",
         "Cell 06 equilibrium",
         "Cell 07 equilibrium",
-        "Cell 08 equilibrium"
+        "Cell 08 equilibrium",
     ],
     "equilibriumState1": [
         "Cell 09 equilibrium",
@@ -192,7 +237,7 @@ ALARM_MAPPINGS = {
         "Cell 13 equilibrium",
         "Cell 14 equilibrium",
         "Cell 15 equilibrium",
-        "Cell 16 equilibrium"
+        "Cell 16 equilibrium",
     ],
     "systemState": [
         "Discharge",
@@ -202,7 +247,7 @@ ALARM_MAPPINGS = {
         "Standby",
         "Shutdown",
         "Reservation bit",
-        "Reservation bit"
+        "Reservation bit",
     ],
     "disconnectionState0": [
         "Cell 01 disconnection",
@@ -212,7 +257,7 @@ ALARM_MAPPINGS = {
         "Cell 05 disconnection",
         "Cell 06 disconnection",
         "Cell 07 disconnection",
-        "Cell 08 disconnection"
+        "Cell 08 disconnection",
     ],
     "disconnectionState1": [
         "Cell 09 disconnection",
@@ -222,6 +267,6 @@ ALARM_MAPPINGS = {
         "Cell 13 disconnection",
         "Cell 14 disconnection",
         "Cell 15 disconnection",
-        "Cell 16 disconnection"
-    ]
+        "Cell 16 disconnection",
+    ],
 }
