@@ -3,8 +3,8 @@
 Easily connect and integrate various Battery Management Systems (BMS) with Home Assistant using this custom integration. This versatile tool provides detailed sensor readings, alarm notifications, and a wealth of telemetry data directly from multiple BMS units.
 
 [![Discord](https://img.shields.io/discord/1161651448011034734?style=for-the-badge&logo=discord)](https://discord.gg/4eQbPEETBR)  <!-- Add your Discord server invite link here -->
-[![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-0099ff?style=for-the-badge&logo=github)](https://github.com/flip555/bms_connector/discussions)
-[![GitHub Wiki](https://img.shields.io/badge/GitHub-Wiki-4db6ac?style=for-the-badge&logo=github)](https://github.com/flip555/bms_connector/wiki)
+[![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-0099ff?style=for-the-badge&logo=github)](https://github.com/f5uii/bms_connector/discussions)
+[![GitHub Wiki](https://img.shields.io/badge/GitHub-Wiki-4db6ac?style=for-the-badge&logo=github)](https://github.com/f5uii/bms_connector/wiki)
 
 ## 🌟 Features
 ### Supported BMS Systems
@@ -33,7 +33,7 @@ Easily connect and integrate various Battery Management Systems (BMS) with Home 
 1. Ensure you have [HACS](https://hacs.xyz/) installed.
 2. Go to the HACS Integrations page.
 3. Click the three dots in the upper right corner and select "Custom repositories".
-4. Enter the URL `https://github.com/flip555/bms_connector` and choose `Integration` from the category dropdown.
+4. Enter the URL `https://github.com/f5uii/bms_connector` and choose `Integration` from the category dropdown.
 5. Click "Add".
 6. You can now find `BMS Connector` in the Integrations list within HACS. Simply install it.
 
@@ -51,7 +51,7 @@ Easily connect and integrate various Battery Management Systems (BMS) with Home 
 6. Click "Submit" to complete the setup.
 
 ## 📸 Screenshots
-![Dashboard Visuals](https://github.com/flip555/bms_connector/blob/main/assets/dashboard.png)
+![Dashboard Visuals](https://github.com/f5uii/bms_connector/blob/main/assets/dashboard.png)
 
 ## 🤝 Contributing Guidelines
 
@@ -63,13 +63,13 @@ Thank you for your interest in contributing to our project! Whether you're repor
 
 - **Branch name**: `main`
 - **Purpose**: This branch contains the production-ready code. It should always be stable and deployable.
-- **Maintainer**: flip555
+- **Maintainer**: f5uii
 
 #### Next Branch
 
 - **Branch name**: `next-branch`
 - **Purpose**: This is the development or integration branch where new features and fixes are accumulated before being merged into `main`.
-- **Maintainer**: flip555
+- **Maintainer**: f5uii
 
 #### Feature or Fix Branches
 
@@ -97,12 +97,12 @@ When reporting issues, please be as descriptive as possible. Provide the steps t
 Thank you for your collaboration and contribution!
 
 ## 🆘 Support
-Encountering an issue or need assistance? Don't hesitate to open an issue on the [GitHub repository](https://github.com/flip555/bms_connector/issues).
+Encountering an issue or need assistance? Don't hesitate to open an issue on the [GitHub repository](https://github.com/f5uii/bms_connector/issues).
 
 ## 📚 References
 
 - **ChatGPT**: Developed by OpenAI, ChatGPT is a large language model capable of understanding and generating human-like text.
-- **Seplos Protocol Manuals**: You can find these in the [assets/](https://github.com/flip555/bms_connector/tree/main/assets) directory of this repository.
+- **Seplos Protocol Manuals**: You can find these in the [assets/](https://github.com/f5uii/bms_connector/tree/main/assets) directory of this repository.
 - **Integration Blueprint**: A valuable template for creating custom components for Home Assistant. [GitHub Repository](https://github.com/ludeeus/integration_blueprint)
 - **ESPHome Seplos BMS**: A related project that integrates Seplos BMS with ESPHome. [GitHub Repository](https://github.com/syssi/esphome-seplos-bms)
 - **Modbus Seplos BMS Reader**: A Modbus implementation for reading Seplos BMS data. [GitHub Repository](https://github.com/g992/modbus-seplos-bms-reader)
